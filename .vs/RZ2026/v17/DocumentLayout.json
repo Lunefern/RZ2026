@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\DOC2\\\u8F6F\u7EFC\\RZ2026\\RZ2026\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{02CDD0D8-4905-42D7-B37B-E4E4AC01C669}|RZ2026\\RZ2026.vcxproj|E:\\DOC2\\\u8F6F\u7EFC\\RZ2026\\RZ2026\\RZ2026\\RZ2026.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{02CDD0D8-4905-42D7-B37B-E4E4AC01C669}|RZ2026\\RZ2026.vcxproj|solutionrelative:RZ2026\\RZ2026.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RZ2026.cpp",
+              "DocumentMoniker": "E:\\DOC2\\\u8F6F\u7EFC\\RZ2026\\RZ2026\\RZ2026\\RZ2026.cpp",
+              "RelativeDocumentMoniker": "RZ2026\\RZ2026.cpp",
+              "ToolTip": "E:\\DOC2\\\u8F6F\u7EFC\\RZ2026\\RZ2026\\RZ2026\\RZ2026.cpp",
+              "RelativeToolTip": "RZ2026\\RZ2026.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACYAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-09T01:04:14.204Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
