@@ -1,39 +1,80 @@
-﻿// 编译环境：Visual C++ 6.0~2022，EasyX_25.9.10
-// https://easyx.cn
-//
+﻿// 编译环境：Visual studio 2022，EasyX_26.1.1
+#define _CRT_SECURE_NO_WARNINGS
 #include <graphics.h>
 #include <conio.h>
+#include <cstdlib>
+#include <iostream>
+#include <iomanip>
+#include <io.h>
 
-int main()
-{
-	// 创建绘图窗口
-	initgraph(640, 480);
+using namespace std;
 
-	// 画渐变的天空(通过亮度逐渐增加)
-	float H = 190;		// 色相
-	float S = 1;		// 饱和度
-	float L = 0.7f;		// 亮度
-	for (int y = 0; y < 480; y++)
-	{
-		L += 0.0005f;
-		setlinecolor(HSLtoRGB(H, S, L));
-		line(0, y, 639, y);
-	}
+int main() {
 
-	// 画彩虹(通过色相逐渐增加)
-	H = 0;
-	S = 1;
-	L = 0.5f;
-	setlinestyle(PS_SOLID, 2);		// 设置线宽为 2
-	for (int r = 400; r > 344; r--)
-	{
-		H += 5;
-		setlinecolor(HSLtoRGB(H, S, L));
-		circle(500, 480, r);
-	}
+    int year, month;
+    string station;
+    char type;
 
-	// 按任意键退出
-	_getch();
-	closegraph();
-	return 0;
+    system("mkdir dx24\\A58265");
+    system("mkdir dx24\\H58265");
+    system("mkdir dx24\\Z58265");
+    system("mkdir dx24\\P58265");
+    system("mkdir dx24\\T58265");
+    system("mkdir dx24\\U58265");
+    system("mkdir dx24\\W58265");
+    system("mkdir dx24\\R58265");
+
+    system("tree dx24 /F > tree.txt");
+
+    system("copy 自动气象站data\\A* dx24\\A58265");
+    system("copy 自动气象站data\\H* dx24\\H58265");
+    system("copy 自动气象站data\\Z* dx24\\Z58265");
+    system("copy 自动气象站data\\P* dx24\\P58265");
+    system("copy 自动气象站data\\T* dx24\\T58265");
+    system("copy 自动气象站data\\U* dx24\\U58265");
+    system("copy 自动气象站data\\W* dx24\\W58265");
+    system("copy 自动气象站data\\R* dx24\\R58265");
+
+    cout << "输入年份:";
+    cin >> year;
+
+    cout << "输入月份:";
+    cin >> month;
+
+    cout << "输入区站号:";
+    cin >> station;
+
+    cout << "输入类型(A，H，Z，P，T，U，W，R):";
+    cin >> type;
+
+    char filename[50];
+
+    switch (type){
+    case 'A':
+        break;
+    case 'H':
+        break;
+    case 'Z':
+        break;
+    case 'P':
+        break;
+    case 'T':
+        sprintf(filename, "%c%s%02d.%03d", type, station.c_str(), month, year % 1000);
+        break;
+    case 'U':
+        break;
+    case 'W':
+        break;
+    case 'R':
+        break;
+    }
+
+    cout << "查询文件: " << filename << endl;
+
+    if (_access(filename, 0) == 0)
+        cout << "文件存在" << endl;
+    else
+        cout << "文件不存在" << endl;
+
+    return 0;
 }
