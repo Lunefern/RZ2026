@@ -34,11 +34,6 @@ void drawMenu()
 
 int fileSort()
 {
-    int r;
-
-    r = system("mkdir dx24\\A58265");
-    if (r != 0) return 0;
-
     system("mkdir dx24\\H58265");
     system("mkdir dx24\\Z58265");
     system("mkdir dx24\\P58265");
@@ -66,6 +61,7 @@ int fileSearch()
     int year, month;
     string station;
     char type;
+    char filepath[120];
 
     cout << "输入年份:";
     cin >> year;
@@ -73,23 +69,60 @@ int fileSearch()
     cout << "输入月份:";
     cin >> month;
 
+    if (month < 1 || month > 12)
+    {
+        cout << "月份输入错误 (1-12)" << endl;
+        return 0;
+    }
+
     cout << "输入区站号:";
     cin >> station;
 
     cout << "输入类型(A H Z P T U W R):";
     cin >> type;
 
-    char filename[50];
+    type = toupper(type);
 
-    sprintf(filename, "%c%s%02d.%03d",
-        type,
-        station.c_str(),
-        month,
-        year % 1000);
+    switch (type)
+    {
+    case 'A':
+        // A文件：A58265-202403
+        snprintf(filepath, sizeof(filepath),
+            "dx24\\%c%s\\%c%s-%d%02d",
+            type,
+            station.c_str(),
+            type,
+            station.c_str(),
+            year,
+            month);
+        break;
 
-    cout << "查询文件: " << filename << endl;
+    case 'H':
+    case 'Z':
+    case 'P':
+    case 'T':
+    case 'U':
+    case 'W':
+    case 'R':
+        // 普通文件：T5826503.026
+        snprintf(filepath, sizeof(filepath),
+            "dx24\\%c%s\\%c%s%02d.%03d",
+            type,
+            station.c_str(),
+            type,
+            station.c_str(),
+            month,
+            year % 1000);
+        break;
 
-    if (_access(filename, 0) == 0)
+    default:
+        cout << "文件类型输入错误" << endl;
+        return 0;
+    }
+
+    cout << "查询路径: " << filepath << endl;
+
+    if (_access(filepath, 0) == 0)
     {
         cout << "文件存在" << endl;
         return 1;

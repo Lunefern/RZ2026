@@ -7,10 +7,10 @@
       "RelativeMoniker": "D:0:0:{02CDD0D8-4905-42D7-B37B-E4E4AC01C669}|RZ2026\\RZ2026.vcxproj|solutionrelative:RZ2026\\RZ2026.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{02CDD0D8-4905-42D7-B37B-E4E4AC01C669}|RZ2026\\RZ2026.vcxproj|E:\\APPLI\\VS\\VC\\AUXILIARY\\VS\\INCLUDE\\GRAPHICS.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\APPLI\\VS\\VC\\Auxiliary\\VS\\include\\easyx.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{02CDD0D8-4905-42D7-B37B-E4E4AC01C669}|RZ2026\\RZ2026.vcxproj|E:\\APPLI\\VS\\VC\\AUXILIARY\\VS\\INCLUDE\\EASYX.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\APPLI\\VS\\VC\\Auxiliary\\VS\\include\\graphics.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -24,7 +24,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "easyx.h",
               "DocumentMoniker": "E:\\APPLI\\VS\\VC\\Auxiliary\\VS\\include\\easyx.h",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\APPLI\\VS\\VC\\Auxiliary\\VS\\include\\easyx.h",
@@ -32,12 +32,11 @@
               "RelativeToolTip": "..\\..\\..\\..\\APPLI\\VS\\VC\\Auxiliary\\VS\\include\\easyx.h",
               "ViewState": "AQIAAKsAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-03-11T01:20:09.776Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-11T01:20:09.776Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "graphics.h",
               "DocumentMoniker": "E:\\APPLI\\VS\\VC\\Auxiliary\\VS\\include\\graphics.h",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\APPLI\\VS\\VC\\Auxiliary\\VS\\include\\graphics.h",
@@ -45,8 +44,7 @@
               "RelativeToolTip": "..\\..\\..\\..\\APPLI\\VS\\VC\\Auxiliary\\VS\\include\\graphics.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-03-11T01:19:28.287Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-11T01:19:28.287Z"
             },
             {
               "$type": "Document",
@@ -56,7 +54,7 @@
               "RelativeDocumentMoniker": "RZ2026\\RZ2026.cpp",
               "ToolTip": "E:\\DOC2\\\u8F6F\u7EFC\\RZ2026\\RZ2026\\RZ2026\\RZ2026.cpp",
               "RelativeToolTip": "RZ2026\\RZ2026.cpp",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAHMAAAAYAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACMAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-03-09T01:04:14.204Z",
               "EditorCaption": ""
