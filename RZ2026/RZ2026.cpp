@@ -10,26 +10,71 @@
 using namespace std;
 
 //读取某一分钟温度
-float getTemperature(const char* filepath, int day, int hour, int minute) {
+float getTemperature(const char* filepath, int day, int hour, int minute)
+{
+    // ===== 参数基本检查 =====
+    if (day < 1 || day > 31 || hour < 0 || hour > 23 || minute < 1 || minute > 60)
+        return -999;
+
     FILE* fp = fopen(filepath, "rb");
-    if (!fp) return -999;
+    if (!fp)
+        return -999;
 
+    // ===== 计算记录号 =====
     int N = day * 24 + hour - 19;
-    long offset = N * 246;
 
-    fseek(fp, offset, SEEK_SET);
+    // 防止月初负记录号
+    if (N <= 0)
+    {
+        fclose(fp);
+        return -999;
+    }
 
+    // ===== 每条记录长度（含回车换行）=====
+    const int recordSize = 248; // 246 + \r\n
+
+    // ===== 跳过第1条头记录 =====
+    long offset = recordSize + (N - 1) * recordSize;
+
+    // 定位
+    if (fseek(fp, offset, SEEK_SET) != 0)
+    {
+        fclose(fp);
+        return -999;
+    }
+
+    // ===== 读取一条记录 =====
     char buffer[300] = { 0 };
-    fread(buffer, 1, 246, fp);
+    size_t readSize = fread(buffer, 1, 246, fp);
 
+    if (readSize != 246)
+    {
+        fclose(fp);
+        return -999;
+    }
+
+    // ===== 计算分钟位置 =====
     int pos = 4 + (minute - 1) * 4;
+
+    if (pos + 4 > 246)
+    {
+        fclose(fp);
+        return -999;
+    }
 
     char tempStr[5] = { 0 };
     strncpy(tempStr, buffer + pos, 4);
 
     fclose(fp);
 
-    return atof(tempStr) / 10.0;
+    // ===== 处理缺测和初始化数据 =====
+    if (tempStr[0] == '/' || tempStr[0] == '-')
+        return -999;
+
+    // ===== 转换温度 =====
+    float temp = (float)atof(tempStr) / 10.0;
+
+    return temp;
 }
 
 //计算某一天平均温度

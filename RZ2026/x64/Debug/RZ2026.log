@@ -1,8 +1,8 @@
 ﻿  RZ2026.cpp
-E:\DOC2\软综\RZ2026\RZ2026\RZ2026\RZ2026.cpp(32,26): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
-E:\DOC2\软综\RZ2026\RZ2026\RZ2026\RZ2026.cpp(93,15): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
-E:\DOC2\软综\RZ2026\RZ2026\RZ2026\RZ2026.cpp(117,16): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
-E:\DOC2\软综\RZ2026\RZ2026\RZ2026\RZ2026.cpp(118,16): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
-E:\DOC2\软综\RZ2026\RZ2026\RZ2026\RZ2026.cpp(120,16): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
-E:\DOC2\软综\RZ2026\RZ2026\RZ2026\RZ2026.cpp(121,16): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+E:\DOC2\软综\RZ2026\RZ2026\RZ2026\RZ2026.cpp(75,16): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+E:\DOC2\软综\RZ2026\RZ2026\RZ2026\RZ2026.cpp(138,15): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+E:\DOC2\软综\RZ2026\RZ2026\RZ2026\RZ2026.cpp(162,16): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+E:\DOC2\软综\RZ2026\RZ2026\RZ2026\RZ2026.cpp(163,16): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+E:\DOC2\软综\RZ2026\RZ2026\RZ2026\RZ2026.cpp(165,16): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+E:\DOC2\软综\RZ2026\RZ2026\RZ2026\RZ2026.cpp(166,16): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
   RZ2026.vcxproj -> E:\DOC2\软综\RZ2026\RZ2026\x64\Debug\RZ2026.exe
