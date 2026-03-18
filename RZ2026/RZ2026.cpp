@@ -9,8 +9,128 @@
 
 using namespace std;
 
-void drawMenu()
+//读取某一分钟温度
+float getTemperature(const char* filepath, int day, int hour, int minute) {
+    FILE* fp = fopen(filepath, "rb");
+    if (!fp) return -999;
+
+    int N = day * 24 + hour - 19;
+    long offset = N * 246;
+
+    fseek(fp, offset, SEEK_SET);
+
+    char buffer[300] = { 0 };
+    fread(buffer, 1, 246, fp);
+
+    int pos = 4 + (minute - 1) * 4;
+
+    char tempStr[5] = { 0 };
+    strncpy(tempStr, buffer + pos, 4);
+
+    fclose(fp);
+
+    return atof(tempStr) / 10.0;
+}
+
+//计算某一天平均温度
+float getDayAvg(const char* filepath, int day)
 {
+    float sum = 0;
+    int count = 0;
+
+    for (int h = 0; h < 24; h++)
+    {
+        for (int m = 1; m <= 60; m++)
+        {
+            float t = getTemperature(filepath, day, h, m);
+            if (t > -100)
+            {
+                sum += t;
+                count++;
+            }
+        }
+    }
+
+    if (count == 0) return 0;
+    return sum / count;
+}
+
+//画曲线
+void drawCurve(float data[], int n)
+{
+    cleardevice();
+
+    // ===== 坐标参数 =====
+    int left = 60;     // 左边距
+    int bottom = 420;  // 底部
+    int right = 560;
+    int top = 60;
+
+    // ===== 画坐标轴 =====
+    setlinecolor(BLACK);
+    line(left, bottom, right, bottom); // X轴
+    line(left, bottom, left, top);     // Y轴
+
+    // ===== 标题 =====
+    settextstyle(20, 0, _T("Consolas"));
+    outtextxy(200, 20, _T("全年日平均气温变化曲线"));
+
+    // ===== Y轴刻度（温度）=====
+    for (int t = -10; t <= 40; t += 10)
+    {
+        int y = bottom - (t + 10) * 5;  // 映射
+
+        line(left - 5, y, left, y);
+
+        TCHAR str[10];
+        _stprintf(str, _T("%d"), t);
+        outtextxy(20, y - 10, str);
+    }
+
+    // ===== X轴刻度（天数）=====
+    for (int i = 0; i <= n; i += 30)
+    {
+        int x = left + i * 1.3;
+
+        line(x, bottom, x, bottom + 5);
+
+        TCHAR str[10];
+        _stprintf(str, _T("%d"), i);
+        outtextxy(x - 10, bottom + 10, str);
+    }
+
+    // ===== 曲线 =====
+    setlinecolor(RED);
+    setlinestyle(PS_SOLID, 2); // 线型（满足题目要求）
+
+    for (int i = 0; i < n - 1; i++)
+    {
+        float t1 = data[i];
+        float t2 = data[i + 1];
+
+        // 限制范围（防止飞图）
+        if (t1 > 40) t1 = 40;
+        if (t1 < -10) t1 = -10;
+        if (t2 > 40) t2 = 40;
+        if (t2 < -10) t2 = -10;
+
+        int x1 = left + i * 1.3;
+        int y1 = bottom - (t1 + 10) * 5;
+
+        int x2 = left + (i + 1) * 1.3;
+        int y2 = bottom - (t2 + 10) * 5;
+
+        line(x1, y1, x2, y2);
+    }
+
+    // ===== 图例 =====
+    settextstyle(16, 0, _T("Consolas"));
+    settextcolor(RED);
+    outtextxy(400, 60, _T("红线：日平均气温"));
+}
+
+//菜单绘制
+void drawMenu() {
     setbkcolor(WHITE);
     cleardevice();
 
@@ -32,8 +152,8 @@ void drawMenu()
     outtextxy(280, 370, _T("退出"));
 }
 
-int fileSort()
-{
+//文件分类
+int fileSort() {
     system("mkdir dx24\\H58265");
     system("mkdir dx24\\Z58265");
     system("mkdir dx24\\P58265");
@@ -56,8 +176,9 @@ int fileSort()
     return 1;
 }
 
-int fileSearch()
-{
+
+//文件查询
+int fileSearch() {
     int year, month;
     string station;
     char type;
@@ -88,7 +209,7 @@ int fileSearch()
     case 'A':
         // A文件：A58265-202403
         snprintf(filepath, sizeof(filepath),
-            "dx24\\%c%s\\%c%s-%d%02d",
+            "dx24\\%c%s\\%c%s-%d%02d.txt",
             type,
             station.c_str(),
             type,
@@ -134,12 +255,95 @@ int fileSearch()
     }
 }
 
+
+//数据分析
 int dataAnalyse()
 {
-    MessageBox(GetHWnd(),
-        _T("数据分析模块（待实现气温曲线绘图）"),
-        _T("提示"),
-        MB_OK);
+    int year, month, day, hour, minute;
+    string station = "58265";
+    string flag;
+
+    cout << "输入年份:";
+    cin >> year;
+
+    cout << "输入月份:";
+    cin >> month;
+
+    cout << "输入日期:";
+    cin >> day;
+
+    cout << "输入小时:";
+    cin >> hour;
+
+    cout << "输入分钟(1-60):";
+    cin >> minute;
+
+    char filepath[120];
+
+    // 拼当前月T文件路径
+    sprintf(filepath,
+        "dx24\\T%s\\T%s%02d.%03d",
+        station.c_str(),
+        station.c_str(),
+        month,
+        year % 1000
+    );
+
+    // 查询某一时刻温度
+    float temp = getTemperature(filepath, day, hour, minute);
+
+    cout << "该时刻气温: " << temp << " ℃" << endl;
+
+    cout << "是否需要绘制气温曲线图('y' for yes, 'n' for no)";
+    cin >> flag;
+
+        if (flag == "y" || flag == "Y")
+        {
+            // ===== 计算全年（简化：每月按30天）=====
+            float yearTemp[366];
+            int index = 0;
+
+            for (int m = 1; m <= 12; m++)
+            {
+                sprintf(filepath,
+                    "dx24\\T%s\\T%s%02d.%03d",
+                    station.c_str(),
+                    station.c_str(),
+                    m,
+                    year % 1000
+                );
+
+                if (_access(filepath, 0) != 0)
+                    continue;
+
+                for (int d = 1; d <= 30; d++)  // 简化
+                {
+                    yearTemp[index++] = getDayAvg(filepath, d);
+                }
+            }
+            // ===== 画图 =====
+            drawCurve(yearTemp, index);
+
+            MessageBox(GetHWnd(),
+                _T("气温曲线绘制完成"),
+                _T("提示"),
+                MB_OK);
+
+            // ===== 等待鼠标点击 =====
+            outtextxy(200, 450, _T("点击返回"));
+
+            while (true)
+            {
+                MOUSEMSG msg = GetMouseMsg();
+                if (msg.uMsg == WM_LBUTTONDOWN)
+                    break;
+            }
+            return 1;
+        }
+        else
+        {
+            return 1;
+        }
 
     return 1;
 }
@@ -178,6 +382,7 @@ int main()
             else if (x > 200 && x < 400 && y>290 && y < 340)
             {
                 dataAnalyse();
+                drawMenu();  // 在这里恢复菜单
             }
 
             else if (x > 200 && x < 400 && y>360 && y < 410)
